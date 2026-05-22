@@ -1,0 +1,360 @@
+# Walshard Studio — Licensing Overview
+
+Copyright (c) 2026 Vlad Cioaba.
+Upstream repository: https://github.com/vladcioaba/walshardstudio
+
+This repository is governed by **three** licenses, depending on which
+directory a file lives in. Pick the one that matches what you are doing.
+
+---
+
+## Mission
+
+Walshard Studio is intended to remain a **free-of-charge tool for the
+community in perpetuity**. Anyone may use it for personal projects,
+study, education, charity, and hobby work without payment, and may
+modify it and share their modifications under the same terms.
+
+**Nobody may monetize the editor itself except the original author
+(Vlad Cioaba).** This is a deliberate, permanent design choice — not
+an oversight. The license terms below enforce it. If you want to use
+the editor commercially in a way the license does not already permit,
+contact the original author for a separate written commercial
+license.
+
+---
+
+## 1. Editor source — PolyForm Noncommercial License 1.0.0
+
+**Applies to everything in this repository EXCEPT the subtrees listed in
+sections 2 and 3 below.** This covers:
+
+* `app/**` (including `app/UILayoutEditor/**`, the editor library)
+* `proj.ios_mac/**`
+* `tools/**`
+* `tests/**`
+* `CMakeLists.txt` and build scripts
+* All documentation in this repo
+
+You may use, copy, study, modify, and distribute the editor source **for
+any noncommercial purpose**. You may NOT (this list is illustrative,
+not exhaustive — the controlling rule is the Reservation of Commercial
+Rights below):
+
+* Sell the editor, a fork of it, or a derivative of it, in source or
+  binary form
+* Offer the editor (or any fork or derivative) as a paid hosted
+  service, SaaS, cloud product, or on-demand build service
+* Bundle the editor (or any fork or derivative) into a paid product,
+  paid bundle, paid asset pack, paid course, or paid training program
+* Charge any fee, subscription, royalty, or other consideration for
+  installations, downloads, mirrors, distributions, or access to the
+  editor or any fork or derivative
+* Accept paid sponsorships, advertising revenue, or paid placements
+  embedded in a fork's user interface or distribution channel
+* Distribute any fork without retaining the upstream copyright notice
+  and a reference to the upstream repository URL above
+
+A "noncommercial purpose" is defined by the PolyForm Noncommercial
+License 1.0.0, reproduced in full at the bottom of this file. Notably,
+use by individuals for hobby projects, study, and personal entertainment
+is permitted; use by charitable, educational, and public research
+organizations is permitted regardless of funding.
+
+**Required Notice** (must accompany any redistribution of editor
+source under PolyForm NC):
+
+> Required Notice: Copyright (c) 2026 Vlad Cioaba.
+> Source: https://github.com/vladcioaba/walshardstudio
+
+### Reservation of Commercial Rights
+
+As the sole copyright holder of the editor source covered by this
+Section 1, **Vlad Cioaba reserves all rights to commercial
+exploitation of that source in perpetuity, exclusively to himself.**
+
+No license granted by this repository to any other person — under
+PolyForm Noncommercial 1.0.0, under the Upstream Integration Grant,
+or otherwise — conveys any commercial right in the editor source to
+any other party. In particular, no forker, sub-licensee, downstream
+recipient, or contributor acquires any right to:
+
+1. Sell, rent, lease, sublicense for a fee, or otherwise charge for
+   copies of the editor (in source or binary form)
+2. Operate the editor (or a fork or derivative) as a paid service of
+   any kind, including SaaS, hosted, cloud, on-demand, or
+   build-as-a-service offerings
+3. Bundle the editor (or a fork or derivative) into any product,
+   subscription, course, training program, asset pack, or
+   distribution that is sold, licensed for a fee, or accessed in
+   exchange for any consideration
+4. Receive paid sponsorships, advertising revenue, paid placements,
+   or any other commercial consideration tied to the editor or a
+   fork's branding, distribution, or user interface
+
+These reserved rights remain reserved through every level of forking
+and sub-distribution. Acquiring a copy of the editor from a forker
+(rather than directly from the original repository) does not enlarge
+the rights you receive — your rights flow directly from the original
+licensor under the terms in this file, and the original licensor's
+reservation of commercial rights binds you regardless of what any
+intermediate forker may have purported to grant.
+
+This reservation is **independent of, and in addition to**, the
+restrictions in PolyForm Noncommercial 1.0.0. Where the two overlap,
+the more restrictive applies. Where PolyForm NC permits something
+that the Reservation of Commercial Rights forbids, the reservation
+controls.
+
+The original licensor may, by separate signed written agreement and
+on a case-by-case basis, grant a paid commercial license to any
+person who wishes to exercise a reserved commercial right. No such
+agreement is granted or implied by this repository's license text;
+contact the original author to negotiate one.
+
+The original licensor may also, at his sole discretion, transfer or
+delegate the reserved commercial rights to a successor entity
+(including but not limited to a company he forms or controls). Any
+such successor inherits the reservation in its entirety; the
+reservation never lapses into the public domain.
+
+---
+
+## 2. Runtime extension library — MIT License
+
+**Applies to:** `extensions/OCSExtension/**`
+
+This is the small runtime library that game projects link against to
+load `.csb` scenes containing OCS custom node types (VectorMapNode,
+SvgImageNode, LottieNode, LitSpriteNode). It is MIT-licensed
+specifically so that **games shipping with this library can be sold
+commercially without restriction**.
+
+See `extensions/OCSExtension/LICENSE` for the full MIT text.
+
+---
+
+## 3. Files produced by the editor — yours, free for any use
+
+**Applies to:** any file you create or export by using Walshard Studio,
+including but not limited to:
+
+* `.csd` scene files you author
+* `.csb` binary scenes produced by the editor's bake step
+* Sidecar JSON files (`*.vmaps.json`, `*.bindings.json`,
+  `*.lights.json`) emitted alongside `.csb`
+* PNG/atlas files baked from SVG sources by the editor
+* C++ controller headers generated by `gen-controller`
+* Screenshots and previews produced by the editor's RPC commands
+
+These are **your work product**. You own them, you may use, modify,
+sell, sublicense, and distribute them under any terms you choose. This
+grant covers only the output of the editor, not the editor itself.
+
+See `LICENSE-ASSETS.md` for the verbatim grant text you can include in
+your own game's third-party-notices file (none is required, but it is
+provided for convenience).
+
+---
+
+## Source Attribution requirement (Section 1 only)
+
+Any fork or derivative work covered by Section 1 must retain a clearly
+visible reference to the upstream repository in **all** of:
+
+1. The README (or equivalent top-level documentation) of the fork
+2. The "About" dialog or equivalent in the running application
+3. Source files that already carry an upstream copyright notice — do
+   not strip those headers
+
+This is in addition to PolyForm Noncommercial's own "Notices" clause,
+which already requires the Required Notice above to travel with the
+software.
+
+---
+
+## Trademark Notice
+
+**Walshard Studio is an independent, unaffiliated project.** It is not
+produced by, endorsed by, sponsored by, or otherwise associated with
+Chukong Technologies, Xiamen Yaji Software Co. Ltd., or any other
+holder of trademarks in the "Cocos", "Cocos2d", "Cocos2d-x", or
+"Cocos Studio" marks.
+
+The product name "Walshard Studio" contains none of these third-party
+trademarks. The words "cocos2d-x", "axmol", and "Cocos Studio" appear
+in this project's tagline, README, in-application About dialog, and
+other documentation **solely in a descriptive, nominative-fair-use
+capacity**, to identify (i) the file formats (`.csd`, `.csb`), (ii)
+the game engines (cocos2d-x and axmol) with which this software is
+interoperable, and (iii) the discontinued editor (shipped by Chukong
+as "Cocos Studio", discontinued 2016) whose workflow this software
+replaces. No claim of ownership in, or license to, any third-party
+trademark is asserted or implied by this project.
+
+All trademarks are the property of their respective owners. The
+copyright license granted in this file does **not** include any
+trademark license. If you fork this project, you remain bound by the
+trademark law of your jurisdiction; in particular, you should not use
+the "Walshard Studio" name or any other party's trademarks in a manner
+likely to cause confusion as to source, sponsorship, or affiliation.
+
+If you are a trademark holder and believe a use in this project
+exceeds nominative fair use, please open an issue on the upstream
+repository so the maintainers can address it.
+
+---
+
+## Upstream Integration Grant (applies to Sections 1 and 2)
+
+By forking, modifying, or otherwise creating a derivative work of any
+file covered by Section 1 (PolyForm Noncommercial editor source) or
+Section 2 (MIT runtime library), you grant **the original licensor
+(Vlad Cioaba) and any successor maintainer of the upstream repository
+at the URL named at the top of this file** a **perpetual, worldwide,
+non-exclusive, royalty-free, irrevocable license** to:
+
+1. Copy any portion of your modifications back into the upstream
+   Walshard Studio repository, and
+2. Re-license those modifications under the same license that governs
+   the file they are integrated into (PolyForm Noncommercial 1.0.0 for
+   Section 1 files, or MIT for Section 2 files), and
+3. Distribute, sublicense, and otherwise exercise all rights granted by
+   that license over the integrated modifications.
+
+You further agree that, on request from the Walshard Studio
+maintainers, you will identify modifications you have made to the
+software and the location where they are published, so that the
+maintainers may evaluate them for upstream integration. You retain all
+copyright in your modifications; this grant is a license, not an
+assignment.
+
+This clause exists so that improvements developed in forks can flow
+back into the upstream project without each contributor needing to
+sign a separate CLA. It does not require you to make your fork public
+or to push changes upstream — only that, if and when the maintainers
+ask, you allow your modifications to be integrated under the same
+license terms that already cover the rest of the file.
+
+---
+
+# PolyForm Noncommercial License 1.0.0
+
+<https://polyformproject.org/licenses/noncommercial/1.0.0>
+
+## Acceptance
+
+In order to get any license under these terms, you must agree to them
+as both strict obligations and conditions to all your licenses.
+
+## Copyright License
+
+The licensor grants you a copyright license for the software to do
+everything you might do with the software that would otherwise infringe
+the licensor's copyright in it for any permitted purpose. However, you
+may only distribute the software according to Distribution License and
+make changes or new works based on the software according to Changes
+and New Works License.
+
+## Distribution License
+
+The licensor grants you an additional copyright license to distribute
+copies of the software. Your license to distribute covers distributing
+the software with changes and new works permitted by Changes and New
+Works License.
+
+## Notices
+
+You must ensure that anyone who gets a copy of any part of the software
+from you also gets a copy of these terms or the URL for them above, as
+well as copies of any plain-text lines beginning with `Required Notice:`
+that the licensor provided with the software. For example:
+
+> Required Notice: Copyright Yoyodyne, Inc. (http://example.com)
+
+## Changes and New Works License
+
+The licensor grants you an additional copyright license to make changes
+and new works based on the software for any permitted purpose.
+
+## Patent License
+
+The licensor grants you a patent license for the software that covers
+patent claims the licensor can license, or becomes able to license,
+that you would infringe by using the software.
+
+## Noncommercial Purposes
+
+Any noncommercial purpose is a permitted purpose.
+
+## Personal Uses
+
+Personal use for research, experiment, and testing for the benefit of
+public knowledge, personal study, private entertainment, hobby
+projects, amateur pursuits, or religious observance, without any
+anticipated commercial application, is use for a permitted purpose.
+
+## Noncommercial Organizations
+
+Use by any charitable organization, educational institution, public
+research organization, public safety or health organization,
+environmental protection organization, or government institution is use
+for a permitted purpose regardless of the source of funding or
+obligations resulting from the funding.
+
+## Fair Use
+
+You may have "fair use" rights for the software under the law. These
+terms do not limit them.
+
+## No Other Rights
+
+These terms do not allow you to sublicense or transfer any of your
+licenses to anyone else, or prevent the licensor from granting licenses
+to anyone else. These terms do not imply any other licenses.
+
+## Patent Defense
+
+If you make any written claim that the software infringes or
+contributes to infringement of any patent, your patent license for the
+software granted under these terms ends immediately. If your company
+makes such a claim, your patent license ends immediately for work on
+behalf of your company.
+
+## Violations
+
+The first time you are notified in writing that you have violated any
+of these terms, or done anything with the software not covered by your
+licenses, your licenses can nonetheless continue if you come into full
+compliance with these terms, and take practical steps to correct past
+violations, within 32 days of receiving notice. Otherwise, all your
+licenses end immediately.
+
+## No Liability
+
+***As far as the law allows, the software comes as is, without any
+warranty or condition, and the licensor will not be liable to you for
+any damages arising out of these terms or the use or nature of the
+software, under any kind of legal claim.***
+
+## Definitions
+
+The **licensor** is the individual or entity offering these terms, and
+the **software** is the software the licensor makes available under
+these terms.
+
+**You** refers to the individual or entity agreeing to these terms.
+
+**Your company** is any legal entity, sole proprietorship, or other
+kind of organization that you work for, plus all organizations that
+have control over, are under the control of, or are under common
+control with that organization. **Control** means ownership of
+substantially all the assets of an entity, or the power to direct its
+management and policies by vote, contract, or otherwise. Control can be
+direct or indirect.
+
+**Your licenses** are all the licenses granted to you for the software
+under these terms.
+
+**Use** means anything you do with the software requiring one of your
+licenses.

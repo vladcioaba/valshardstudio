@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "walshard-mcp"
+version = "0.1.0"
+description = "MCP bridge for Walshard Studio — drive the cocos2dx scene editor from Claude Code / Claude Desktop / any MCP client."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "PolyForm-Noncommercial-1.0.0" }
+authors = [{ name = "Vlad Cioaba" }]
+keywords = ["mcp", "cocos2d-x", "axmol", "scene-editor", "walshard"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "mcp>=1.27.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/vladcioaba/walshardstudio"
+Source = "https://github.com/vladcioaba/walshardstudio/tree/main/mcp-server"
+Issues = "https://github.com/vladcioaba/walshardstudio/issues"
+
+[project.scripts]
+walshard-mcp = "walshard_mcp.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

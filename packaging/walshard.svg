@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Walshard Studio logo: crystal shard on a circular disc.
+       Palette echoes the in-app theme (neon-cyan on brushed steel).
+
+       Copyright (c) 2026 Vlad Cioaba.
+       Released under the same license as the editor source it ships
+       with (top-level LICENSE, Section 1: PolyForm Noncommercial 1.0.0
+       + Reservation of Commercial Rights). Hand-authored from scratch;
+       no third-party stock assets. -->
+
+  <defs>
+    <!-- Disc surface: charcoal with off-center highlight for depth. -->
+    <radialGradient id="disc" cx="0.3" cy="0.25" r="0.95">
+      <stop offset="0"   stop-color="#2c394f"/>
+      <stop offset="0.55" stop-color="#1a2230"/>
+      <stop offset="1"   stop-color="#0d131c"/>
+    </radialGradient>
+
+    <!-- Shard body: cyan family, top-down gradient. -->
+    <linearGradient id="shard" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#a5f3fc"/>
+      <stop offset="0.5" stop-color="#22d3ee"/>
+      <stop offset="1"   stop-color="#0e7490"/>
+    </linearGradient>
+
+    <!-- Specular highlight on the left facet. -->
+    <linearGradient id="hi" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Outer rim glow. -->
+    <radialGradient id="rim" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0.85" stop-color="#22d3ee" stop-opacity="0"/>
+      <stop offset="0.97" stop-color="#22d3ee" stop-opacity="0.35"/>
+      <stop offset="1"   stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background disc + rim. -->
+  <circle cx="128" cy="128" r="120" fill="url(#disc)"/>
+  <circle cx="128" cy="128" r="120" fill="url(#rim)"/>
+  <circle cx="128" cy="128" r="120" fill="none" stroke="#0e9bcc" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Crystal shard: 6-sided, asymmetric, pointing up-right for character.
+       Body. -->
+  <polygon points="128,42 90,110 102,200 152,204 168,108"
+           fill="url(#shard)"
+           stroke="#0e9bcc"
+           stroke-width="2"
+           stroke-linejoin="round"/>
+
+  <!-- Internal facet lines (catch the eye, signal "crystal"). -->
+  <polyline points="128,42 102,200" fill="none" stroke="#0e9bcc" stroke-width="1.4" opacity="0.7"/>
+  <polyline points="128,42 152,204" fill="none" stroke="#0e9bcc" stroke-width="1.4" opacity="0.7"/>
+  <polyline points="90,110 128,130 168,108" fill="none" stroke="#0e9bcc" stroke-width="1.4" opacity="0.7"/>
+  <polyline points="128,130 128,200" fill="none" stroke="#0e9bcc" stroke-width="1" opacity="0.4"/>
+
+  <!-- Left-facet specular highlight. -->
+  <polygon points="128,42 90,110 102,200 128,130"
+           fill="url(#hi)"
+           opacity="0.45"/>
+</svg>

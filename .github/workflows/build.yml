@@ -1,0 +1,143 @@
+name: build
+
+# CI: macOS (arm64) + Linux (x86_64) matrix.
+#
+# Triggers:
+#   * push to main         → build + upload artifact (30-day retention)
+#   * tag v*               → build + attach to GitHub Release
+#   * pull request         → build only (no upload), gate merges
+#
+# axmol is pinned to v2.9.1. Bump the AXMOL_REF env when validated
+# against a newer release. Cache key includes AXMOL_REF so a bump
+# invalidates the cached checkout automatically.
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+
+env:
+  AXMOL_REF: v2.9.1
+
+jobs:
+  build:
+    name: ${{ matrix.label }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-14
+            label: macos-arm64
+            artifact: Walshard-macOS-arm64.zip
+          - os: ubuntu-22.04
+            label: linux-x86_64
+            artifact: Walshard-linux-x86_64.tar.gz
+          - os: windows-2022
+            label: windows-x64
+            artifact: Walshard-windows-x64.zip
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache axmol
+        id: cache-axmol
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.workspace }}/axmol
+          key: axmol-${{ matrix.label }}-${{ env.AXMOL_REF }}
+
+      - name: Clone axmol (cache miss)
+        if: steps.cache-axmol.outputs.cache-hit != 'true'
+        run: |
+          git clone --depth 1 --branch ${{ env.AXMOL_REF }} \
+            https://github.com/axmolengine/axmol \
+            ${{ runner.workspace }}/axmol
+
+      - name: Install macOS deps
+        if: matrix.os == 'macos-14'
+        run: brew install librsvg cmake
+
+      - name: Install Linux deps
+        if: matrix.os == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            cmake ninja-build pkg-config python3 \
+            libgl1-mesa-dev libglu1-mesa-dev libglew-dev \
+            libxi-dev libxinerama-dev libxrandr-dev libxcursor-dev \
+            libgtk-3-dev libssl-dev libuv1-dev \
+            libpng-dev libjpeg-dev librsvg2-bin \
+            libfontconfig1-dev libvlc-dev
+
+      - name: Install Windows deps
+        if: matrix.os == 'windows-2022'
+        run: choco install python --version=3.11.0 -y --no-progress
+        shell: pwsh
+
+      - name: Configure (macOS)
+        if: matrix.os == 'macos-14'
+        run: |
+          cmake -S . -B build -G Xcode \
+            -DAX_ROOT=${{ runner.workspace }}/axmol \
+            -DCMAKE_BUILD_TYPE=Release
+
+      - name: Configure (Linux)
+        if: matrix.os == 'ubuntu-22.04'
+        run: |
+          cmake -S . -B build -G Ninja \
+            -DAX_ROOT=${{ runner.workspace }}/axmol \
+            -DCMAKE_BUILD_TYPE=Release
+
+      - name: Configure (Windows)
+        if: matrix.os == 'windows-2022'
+        shell: pwsh
+        run: cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DAX_ROOT="${{ runner.workspace }}/axmol"
+
+      - name: Build
+        run: cmake --build build --config Release -j
+
+      - name: Package (macOS)
+        if: matrix.os == 'macos-14'
+        run: |
+          cd build/bin/Walshard/Release
+          zip -r ../../../../${{ matrix.artifact }} Walshard.app
+
+      - name: Package (Linux)
+        if: matrix.os == 'ubuntu-22.04'
+        run: |
+          cd build/bin/Walshard
+          tar -czf ../../../${{ matrix.artifact }} *
+
+      - name: Package (Windows)
+        if: matrix.os == 'windows-2022'
+        shell: pwsh
+        run: |
+          $src = "build/bin/Walshard/Release"
+          if (Test-Path $src)
+          {
+              Compress-Archive -Path "$src/*" -DestinationPath "${{ matrix.artifact }}"
+          }
+          else
+          {
+              # axmol's Win64 build sometimes lands here instead — try alt.
+              Compress-Archive -Path "build/bin/Walshard/*" -DestinationPath "${{ matrix.artifact }}"
+          }
+
+      - name: Upload artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: ${{ matrix.artifact }}
+          retention-days: 30
+
+      - name: Attach to release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ matrix.artifact }}
+          fail_on_unmatched_files: true

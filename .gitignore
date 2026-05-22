@@ -1,0 +1,57 @@
+# Build output
+build/
+build.axmol/
+build.tests/
+dist/
+*.o
+*.obj
+*.exe
+*.app
+*.xcuserdata/
+*.xcworkspace/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile.cmake
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.cache/
+.clangd/
+compile_commands.json
+
+# macOS
+.DS_Store
+*.icloud
+
+# Local tooling state
+.claude/
+.rlm-rag/
+.coplay/
+.codegraph/
+memory/
+
+# Editor / runtime
+imgui.ini
+*.log
+*.tmp
+
+# Local checkpoints (kept outside the project tree but match anything that
+# slips in)
+*-checkpoint-*.tar.gz
+/valshardstudio/
